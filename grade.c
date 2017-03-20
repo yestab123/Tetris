@@ -1,9 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "print.h"
 #include "queue.h"
+#include "mark.h"
+
+int LEVEL=1;
+int GRADE=0;
+float dropTIME=0.57F;
+float oneTIME=0.57F;//Level time;
+float twoTIME=0.51F;
+float threeTIME=0.47F;
+float fourTIME=0.42F;
+float fiveTIME=0.39F;
+float sixTIME=0.30F;
+
+int queue_mark;//mark miss queue
+
+extern Queue Q;
+
+extern int screen_a[24][12];
 
 void setLEVEL()
 {
@@ -51,7 +69,7 @@ int WIN_TEST()
         LINE=0;
         for(j=0;j<12;j++)
         {
-            if(a[i][j]>STAY)
+            if(screen_a[i][j]>STAY)
             {
                 LINE++;
             }
@@ -77,7 +95,7 @@ int WIN_TEST()
             {
                 for(j=0;j<12;j++)
                 {
-                    a[i][j]=a[i-1][j];
+                    screen_a[i][j] = screen_a[i-1][j];
                 }
             }
             GRADE+=(10+2*LEVEL);

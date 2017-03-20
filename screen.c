@@ -2,6 +2,10 @@
 #include <windows.h>
 #include <conio.h>
 
+COORD setCOORD;//定位结构体
+
+extern HANDLE setHandleaa;
+
 void setXY(int x,int y)
 {
     setCOORD.X=x;

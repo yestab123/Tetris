@@ -4,7 +4,8 @@
 #include <time.h>
 #include <windows.h> //Sleep()
 #include <conio.h> //kbhit()
-#include "main.h"
+
+#include "core.h"
 
 #include "grade.h"
 #include "mark.h"
@@ -16,7 +17,56 @@
 //Version 1.0.21
 
 extern Queue Q;
+extern float dropTIME;
 
+int STATUS = 0; //GAME STATUS MARK
+int MARK;
+int MARK_LINE;
+int FORECAST;
+int FORECAST_ARRAY[4][4];
+int PAUSE=0;//PAUSE status mark;
+int testnum=0;
+int setCOLOR=0;//blocks with color;1=red,2=blue,3=green,4=yellow,0=;
+int setCOLORfore=0;
+int downCOLOR=0;
+HANDLE setHandleaa;//¾ä±úÉùÃ÷
+clock_t clockNow,clockLast;//remeber two time.
+
+int screen_a[24][12]={0};
+int h[4][4]={{0,0,0,0},
+             {1,0,0,0},
+             {1,0,0,0},
+             {1,1,0,0}};//L
+
+int c[4][4]={{0,0,0,0},
+             {0,1,0,0},
+             {1,1,0,0},
+             {1,0,0,0}};//2
+
+int f[4][4]={{0,0,0,0},
+             {0,1,0,0},
+             {0,1,0,0},
+             {1,1,0,0}};//F-L
+
+int e[4][4]={{0,0,0,0},
+             {0,0,0,0},
+             {0,1,0,0},
+             {1,1,1,0}};//3
+
+int o[4][4]={{0,0,0,0},
+             {0,0,0,0},
+             {1,1,0,0},
+             {1,1,0,0}};//0
+
+int p[4][4]={{0,0,0,0},
+             {1,0,0,0},
+             {1,1,0,0},
+             {0,1,0,0}};//F-2
+
+int t[4][4]={{1,0,0,0},
+             {1,0,0,0},
+             {1,0,0,0},
+             {1,0,0,0}};
 
 
 int gameover_judge()
@@ -25,7 +75,7 @@ int gameover_judge()
     int check=0;
     for(;i<12;i++)
     {
-        if((a[4][i])>STAY)
+        if((screen_a[4][i])>STAY)
         {
             check=1;
             break;
@@ -46,7 +96,7 @@ int gameover_judge()
 
 void r_insert()
 {
-    int i,j,k,m;
+    int ii,jj,kk,mm;
     int make;
     make=FORECAST;
     srand((unsigned)time(0));
@@ -58,82 +108,82 @@ void r_insert()
     if(make==1)
     {
 
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=h[k][m];
+            screen_a[ii][jj]=h[kk][mm];
         }
     }
 
     }
     else if(make==2)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=c[k][m];
+            screen_a[ii][jj]=c[kk][mm];
         }
     }
     }
     else if(make==3)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=f[k][m];
+            screen_a[ii][jj]=f[kk][mm];
         }
     }
     }
     else if(make==4)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=e[k][m];
+            screen_a[ii][jj]=e[kk][mm];
         }
     }
     }
         else if(make==5)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=o[k][m];
+            screen_a[ii][jj]=o[kk][mm];
         }
     }
     }
         else if(make==6)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=p[k][m];
+            screen_a[ii][jj]=p[kk][mm];
         }
     }
     }
         else if(make==0)
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=t[k][m];
+            screen_a[ii][jj]=t[kk][mm];
         }
     }
     }
     else
     {
-    for(i=0,k=0;i<4;i++,k++)
+    for(ii=0,kk=0;ii<4;ii++,kk++)
     {
-        for(j=4,m=0;j<8;j++,m++)
+        for(jj=4,mm=0;jj<8;jj++,mm++)
         {
-            a[i][j]=h[k][m];
+            screen_a[ii][jj]=h[kk][mm];
         }
     }
     }
@@ -169,7 +219,7 @@ int r_move_test()//testing the next step
     {
         for(i=0;i<12;i++)
         {
-            if((a[j][i]==DOWN)&&(a[j+1][i]>STAY))
+            if((screen_a[j][i]==DOWN)&&(screen_a[j+1][i]>STAY))
             {
                         i=0;
                         if(testnum==0)
@@ -208,10 +258,10 @@ int r_move()
         {
                 for(j=0;j<12;j++)
             {
-                if(a[i][j]==DOWN)
+                if(screen_a[i][j]==DOWN)
                 {
-                        a[i+1][j]=a[i][j];
-                        a[i][j]=0;
+                        screen_a[i+1][j]=screen_a[i][j];
+                        screen_a[i][j]=0;
 
                 }
             }
@@ -239,10 +289,10 @@ void r_move_soon()
         {
                 for(j=0;j<12;j++)
             {
-                if(a[i][j]==DOWN)
+                if(screen_a[i][j]==DOWN)
                 {
-                        a[i+1][j]=a[i][j];
-                        a[i][j]=0;
+                        screen_a[i+1][j]=screen_a[i][j];
+                        screen_a[i][j]=0;
 
                 }
             }
@@ -267,7 +317,7 @@ int MOVE_LEFT_TEST()
     {
         for(i=0;i<24;i++)
         {
-            if((a[i][k]==DOWN)&&(a[i][k-1]>STAY))
+            if((screen_a[i][k]==DOWN)&&(screen_a[i][k-1]>STAY))
                 return 1;
         }
     }
@@ -284,10 +334,10 @@ int MOVE_LEFT()
     {
         for(j=0;j<24;j++)
         {
-            if(a[j][i]==DOWN)
+            if(screen_a[j][i]==DOWN)
             {
-                a[j][i-1]=DOWN;
-                a[j][i]=0;
+                screen_a[j][i-1]=DOWN;
+                screen_a[j][i]=0;
             }
         }
     }
@@ -309,7 +359,7 @@ int MOVE_RIGHT_TEST()
     {
         for(j=0;j<24;j++)
         {
-            if(a[j][k]==DOWN&&a[j][k+1]>STAY)
+            if(screen_a[j][k]==DOWN&&screen_a[j][k+1]>STAY)
                 return 1;
         }
     }
@@ -340,10 +390,10 @@ int MOVE_RIGHT()
     {
         for(j=0;j<24;j++)
         {
-            if(a[j][t]==DOWN)
+            if(screen_a[j][t]==DOWN)
             {
-                a[j][t+1]=DOWN;
-                a[j][t]=0;
+                screen_a[j][t+1]=DOWN;
+                screen_a[j][t]=0;
             }
         }
     }
@@ -407,9 +457,9 @@ int KEY_CATCH()
     for(i=0;i<24;i++)
         for(j=0;j<12;j++)
         {
-            if(a[i][j]==DOWN)
+            if(screen_a[i][j]==DOWN)
             {
-                a[i][j]=setCOLOR+3;
+                screen_a[i][j]=setCOLOR+3;
             }
 
         }

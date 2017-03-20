@@ -1,10 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+#include <conio.h>
+#include <time.h>
 
 #include "screen.h"
 #include "queue.h"
 #include "print.h"
+#include "ranking_list.h"
+#include "core.h"
+
+extern int STATUS;
+extern int FORECAST;
+extern int setCOLOR;
+extern int setCOLORfore;
+extern int queue_mark;
+extern HANDLE setHandleaa;
+extern int screen_a[24][12];
+extern int FORECAST_ARRAY[4][4];
+extern int LEVEL;
+extern int GRADE;
+extern int h[4][4];
+extern int c[4][4];
+extern int f[4][4];
+extern int e[4][4];
+extern int o[4][4];
+extern int p[4][4];
+extern int t[4][4];
+extern Queue Q;
 
 void GAMECHOICE()//make choice before start the game! instead 1.start game,2.rank lisk,3.exit
 {
@@ -109,7 +133,7 @@ void GAMESTART()//include the recycle  running function when start the game.
     for(i=0;i<24;i++)
         for(j=0;j<12;j++)
     {
-        a[i][j]=0;
+        screen_a[i][j]=0;
     }
     system("cls");
     drawFrame();
@@ -302,52 +326,52 @@ int printf_full_miss()
 		for(j=0;j<12;j++)
 		{
 
-			if((a[i][j]==0 ))
+			if((screen_a[i][j]==0 ))
 				printf("%2s"," ");
-			else if(a[i][j]>STAY && test_queue_equal(i))
+			else if(screen_a[i][j]>STAY && test_queue_equal(i))
             {
-                if(a[i][j]==3)
+                if(screen_a[i][j]==3)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN|FOREGROUND_BLUE);
                 }
-                else if(a[i][j]==4)
+                else if(screen_a[i][j]==4)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED);
                 }
-                else if(a[i][j]==5)
+                else if(screen_a[i][j]==5)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_BLUE);
                 }
-                else if(a[i][j]==6)
+                else if(screen_a[i][j]==6)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN);
                 }
-                else if(a[i][j]==7)
+                else if(screen_a[i][j]==7)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED |FOREGROUND_GREEN);
                 }
                 printf("¡ö");
                 SetConsoleTextAttribute(setHandleaa, 0x0F);
             }
-            else if(a[i][j]>STAY)
+            else if(screen_a[i][j]>STAY)
             {
-                if(a[i][j]==3)
+                if(screen_a[i][j]==3)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==4)
+                else if(screen_a[i][j]==4)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==5)
+                else if(screen_a[i][j]==5)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==6)
+                else if(screen_a[i][j]==6)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==7)
+                else if(screen_a[i][j]==7)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED |FOREGROUND_GREEN|FOREGROUND_INTENSITY);
                 }
@@ -355,7 +379,7 @@ int printf_full_miss()
                 SetConsoleTextAttribute(setHandleaa, 0x0F);
             }
 
-            else if(a[i][j]==DOWN)
+            else if(screen_a[i][j]==DOWN)
             {
                 if(setCOLOR==0)
                 {
@@ -447,27 +471,27 @@ int printf_full()
 		for(j=0;j<12;j++)
 		{
 
-			if(a[i][j]==0)
+			if(screen_a[i][j]==0)
 				printf("%2s"," ");
-			else if(a[i][j]>STAY)
+			else if(screen_a[i][j]>STAY)
             {
-                if(a[i][j]==3)
+                if(screen_a[i][j]==3)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==4)
+                else if(screen_a[i][j]==4)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==5)
+                else if(screen_a[i][j]==5)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==6)
+                else if(screen_a[i][j]==6)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_GREEN|FOREGROUND_INTENSITY);
                 }
-                else if(a[i][j]==7)
+                else if(screen_a[i][j]==7)
                 {
                     SetConsoleTextAttribute(setHandleaa, FOREGROUND_RED |FOREGROUND_GREEN|FOREGROUND_INTENSITY);
                 }
@@ -475,7 +499,7 @@ int printf_full()
                 SetConsoleTextAttribute(setHandleaa, 0x0F);
             }
 
-            else if(a[i][j]==DOWN)
+            else if(screen_a[i][j]==DOWN)
             {
                 if(setCOLOR==0)
                 {

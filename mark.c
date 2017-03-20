@@ -5,8 +5,7 @@
 
 #include "mark.h"
 
-#define STAY 2 //the block stop
-#define DOWN 1 // which block is moving
+extern int screen_a[24][12];
 
 /*
 
@@ -58,7 +57,7 @@ int CROSS_MAX()//Under
 		{
 		for(j=0;j<12;j++)
 			{
-			if(a[i][j]==DOWN)
+			if(screen_a[i][j]==DOWN)
 			{imax=i;
 			x=1;
 			break;}
@@ -77,7 +76,7 @@ int CROSS_MIN()//Top
 	{
 		for(j=0;j<12;j++)
 			{
-			if(a[i][j]==DOWN)
+			if(screen_a[i][j]==DOWN)
 			{imin=i;
 			x=1;
 			break;}
@@ -96,7 +95,7 @@ int ROW_MAX()//RIGHT
 		{
 		 for(i=23;i>=0;i--)
 			{
-			if(a[i][j]==DOWN)
+			if(screen_a[i][j]==DOWN)
 			 {jmax=j;
 			 x=1;
 			 break;}
@@ -115,7 +114,7 @@ int ROW_MIN()//LEFT
 	{
 		for(i=0;i<24;i++)
 		 {
-		 if(a[i][j]==DOWN)
+		 if(screen_a[i][j]==DOWN)
 		 {jmin=j;
 		 x=1;
 		 break;}

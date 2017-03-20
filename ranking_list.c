@@ -4,6 +4,8 @@
 
 #include "ranking_list.h"
 
+extern int GRADE=0;
+
 //int ps=1;      //当前玩家分数
 #define DEBUG 1
 	//排序函数

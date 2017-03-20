@@ -6,13 +6,17 @@
 
 int m,n,line_mark=0;
 
+extern int MARK;
+extern int MARK_LINE;
+extern int screen_a[24][12];
+
 //=======================================================
 int find_mark()
 {
 	int i,j;
  for(i=0;i<24;i++)
 		for(j=0;j<12;j++)
-			if(a[i][j]==1)
+			if(screen_a[i][j]==1)
 			{
 				j=12;
 				MARK=i;
@@ -21,7 +25,7 @@ int find_mark()
 
      for(i=23;i>=0;i--)
 		for(j=0;j<12;j++)
-			if(a[j][i]==1)
+			if(screen_a[j][i]==1)
 			{
 				MARK_LINE=i;
 				break;
@@ -35,17 +39,17 @@ void find_point()//找出转置时的中心点
 	int i,j,s,t;
 	for(i=0;i<12;i++)
 		for(j=0;j<24;j++)
-			if(a[j][i]==1)
+			if(screen_a[j][i]==1)
 
-				if(a[j+1][i]==1)
-					if(a[j+2][i]==1)
+				if(screen_a[j+1][i]==1)
+					if(screen_a[j+2][i]==1)
 					{
 						m =j;  n=i; i=13; j=24;}
 					else
 					{
 
 						m= j; n=i+1;
-						if(a[m-1][n]==1)
+						if(screen_a[m-1][n]==1)
 							m=m-1;
 						i=13; j=24;
 					}
@@ -53,14 +57,14 @@ void find_point()//找出转置时的中心点
 				{
 					for(s=11;s>=0;s--)
 						for(t=0;t<24;t++)
-							if(a[t][s]==1)
+							if(screen_a[t][s]==1)
 							{
 							//	if(s-i==3)
 							//	{
 							//		m=t; n=s-1; t=21; s=-1; break;
 							//	}
-								if(a[t+1][s]==1)
-									if(a[t+2][s]==1)
+								if(screen_a[t+1][s]==1)
+									if(screen_a[t+2][s]==1)
 									{
 										m=t; n=s; t=24; s=-1; }
 									else
@@ -68,7 +72,7 @@ void find_point()//找出转置时的中心点
 										m=t; n=s-1; t=24; s=-1; }
 								else
 								{
-									if(a[t-1][s-1]==1)
+									if(screen_a[t-1][s-1]==1)
 									{
 										m=t-1; n=s-1;t=24; s=-1; }
 									else
@@ -83,13 +87,13 @@ void find_point()//找出转置时的中心点
 	for(i=0;i<12;i++)//判断图形是否为直线，若为竖直线，line-mark=1，否则line-mark=2
 
 		for(j=0;j<24;j++)
-			if(a[j][i]==1)
+			if(screen_a[j][i]==1)
 
 				if(j+3<24)
-					if(a[j+1][i]==1)
+					if(screen_a[j+1][i]==1)
 					{
-						if(a[j+2][i]==1)
-							if(a[j+3][i]==1)
+						if(screen_a[j+2][i]==1)
+							if(screen_a[j+3][i]==1)
 							{
 							m=j+2; n=i; line_mark=1 ; i=12;j=24 ; }
 					}
@@ -97,9 +101,9 @@ void find_point()//找出转置时的中心点
 
 				else
 					if(i+3<12)
-						if(a[j][i+1]==1)
-							if(a[j][i+2]==1)
-								if(a[j][i+3]==1)
+						if(screen_a[j][i+1]==1)
+							if(screen_a[j][i+2]==1)
+								if(screen_a[j][i+3]==1)
 									{ m=j; n=i+2; line_mark=2; i=12;j=24 ;  }
 
 }
@@ -117,7 +121,7 @@ int  try_trans()//判断转置后是否会遇到标记2的方块
 		for(i=0,s=m-2;i<4;s++,i++)
 			for(j=0,t=n-2;j<n;j++,t++)
 				if(d[i][j]==1)
-					if(a[s][t]>=2)
+					if(screen_a[s][t]>=2)
 						return 0;
 	}
 
@@ -128,20 +132,20 @@ int  try_trans()//判断转置后是否会遇到标记2的方块
 		for(i=0,s=m-2;i<4;s++,i++)
 			for(j=0,t=n-2;j<4;j++,t++)
 				if(d[i][j]==1)
-					if(a[s][t]>=2)
+					if(screen_a[s][t]>=2)
 						return 0;
 	}
 
-    if(a[m][n]==1&&a[m+1][n]==1&&a[m+2][n]==1&&a[m+1][n-1]==1&&a[m+2][n-1]>=2)
+    if(screen_a[m][n]==1&&screen_a[m+1][n]==1&&screen_a[m+2][n]==1&&screen_a[m+1][n-1]==1&&screen_a[m+2][n-1]>=2)
         return 0;
 
 
-    if(a[m][n]==1&&a[m+1][n]==1&&a[m+2][n]==1&&a[m+1][n+1]==1&&a[m+2][n+1]>=2)
+    if(screen_a[m][n]==1&&screen_a[m+1][n]==1&&screen_a[m+2][n]==1&&screen_a[m+1][n+1]==1&&screen_a[m+2][n+1]>=2)
         return 0;
 
 	for(i=m,s=2;i<m+3;s--,i++)
 		for(j=n-1,t=0;j<n+2;t++,j++)
-			d[t][s]=a[i][j];
+			d[t][s]=screen_a[i][j];
 
 
 
@@ -185,7 +189,7 @@ int  try_trans()//判断转置后是否会遇到标记2的方块
 		{
 
 			if(d[i][j]==1)
-				if(a[m+i][t+j]>=2)
+				if(screen_a[m+i][t+j]>=2)
 					return 0;
 
         }
@@ -206,7 +210,7 @@ int  cannot_trans()//不能转置，即不够空间转置
 		return 1;
 	if(!try_trans())
 		return 1;
-	if(a[m][n-1]==1&&a[m][n]==1&&a[m+1][n-1]==1&&a[m+1][n]==1)
+	if(screen_a[m][n-1]==1&&screen_a[m][n]==1&&screen_a[m+1][n-1]==1&&screen_a[m+1][n]==1)
 		return 1;
 
 
@@ -226,8 +230,8 @@ int trans()//转置
 	//	if(c[][]==1&&c[][]==1&&c[][]==1&&c[][]==1)
 			if(line_mark==1)
 			{
-				a[m][n-2]=a[m][n-1]=a[m][n+1]=1;
-				a[m-2][n]=a[m-1][n]=a[m+1][n]=0;
+				screen_a[m][n-2]=screen_a[m][n-1]=screen_a[m][n+1]=1;
+				screen_a[m-2][n]=screen_a[m-1][n]=screen_a[m+1][n]=0;
 				line_mark=0;
 				find_mark();
 				printf_full();
@@ -236,8 +240,8 @@ int trans()//转置
 
 			if(line_mark==2)
 			{
-				a[m-2][n]=a[m-1][n]=a[m+1][n]=1;
-				a[m][n-2]=a[m][n-1]=a[m][n+1]=0;
+				screen_a[m-2][n]=screen_a[m-1][n]=screen_a[m+1][n]=1;
+				screen_a[m][n-2]=screen_a[m][n-1]=screen_a[m][n+1]=0;
 				line_mark=0;
 				find_mark();
 				printf_full();
@@ -248,8 +252,8 @@ int trans()//转置
 
 			for(i=m,s=2;i<m+3;s--,i++)
 			for(j=n-1,t=0;j<n+2;t++,j++)
-                if(a[i][j]<2)
-				d[t][s]=a[i][j];
+                if(screen_a[i][j]<2)
+				d[t][s]=screen_a[i][j];
 	//	for(i=m-1,s=3;i<4;i++,s--)
 	//		for(j=1,t=1;j<4;j++,t++)
 	//			b[t][s]=c[i][j];
@@ -294,9 +298,9 @@ int trans()//转置
 				for(j=0,t=n-1;j<3;t++,j++)
                 {
                 if(d[i][j]==0)
-                  if(a[s][t]>=2)
+                  if(screen_a[s][t]>=2)
                        continue;
-                a[s][t]=d[i][j];
+                screen_a[s][t]=d[i][j];
                 }
 		//system("cls");
 		find_mark();

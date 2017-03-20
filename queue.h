@@ -4,7 +4,7 @@
 
 //////queue.c///
 #define OK 1;
-//#define ERROR 0;
+#define ERROR 0;
 
 
 typedef struct Queue_DATA_s
@@ -23,6 +23,6 @@ typedef struct Queue_s
 int InitQueue(Queue *Q);
 int EnQueue(Queue *Q,int e);
 int DeQueue(Queue *Q,int *e);
-int QueueEmpty(Queue Q)
+int QueueEmpty(Queue Q);
 
 #endif
