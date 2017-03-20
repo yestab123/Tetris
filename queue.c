@@ -1,3 +1,12 @@
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+#include <stdlib.h>
+
+#include "queue.h"
+
+Queue Q;
+
 //mark the remove line... with <queue.h>
 int InitQueue(Queue *Q)
 {

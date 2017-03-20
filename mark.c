@@ -1,12 +1,14 @@
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+
+#include "mark.h"
 
 #define STAY 2 //the block stop
 #define DOWN 1 // which block is moving
 
-
+/*
 
 
 int   a[20][12]={{0,0,0,0,0,0,0,0,0,0,0,0},

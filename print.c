@@ -1,3 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "screen.h"
+#include "queue.h"
+#include "print.h"
+
 void GAMECHOICE()//make choice before start the game! instead 1.start game,2.rank lisk,3.exit
 {
     int CHOICE=1;

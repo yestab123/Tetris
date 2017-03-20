@@ -5,24 +5,19 @@
 #include <windows.h> //Sleep()
 #include <conio.h> //kbhit()
 #include "main.h"
-#include "ranking_list.h"
-#include "queue.c"
-#include "trans.c"
-#include "mark.c"
-#include "print.c"
-#include "grade.c"
-#include "ranking_list.c"
 
+#include "grade.h"
+#include "mark.h"
+#include "print.h"
+#include "trans.h"
+#include "screen.h"
+#include "ranking_list.h"
+#include "queue.h"
 //Version 1.0.21
 
+extern Queue Q;
 
 
-void setXY(int x,int y)
-{
-    setCOORD.X=x;
-    setCOORD.Y=y;
-    SetConsoleCursorPosition(setHandleaa,setCOORD);
-}
 
 int gameover_judge()
 {

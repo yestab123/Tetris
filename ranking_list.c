@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "ranking_list.h"
 
 //int ps=1;      //当前玩家分数
 #define DEBUG 1
@@ -12,22 +17,19 @@ int rank()
 		 printf("Can't open show file!\n");
 		 exit(0);
 	 }for(i=0;i<10;i++)
-	 
-	 { //fseek(fp,sizeof(struct Data),0); 
-	 if(fread(&player[i],sizeof(struct Data),1,fp)!=1) 
-	 printf(" !!%d!! rank()File read error!\n",i+1);
-	 
-
-	 }
-	  fclose(fp);
+        { //fseek(fp,sizeof(struct Data),0); 
+            if(fread(&player[i],sizeof(struct Data),1,fp)!=1) 
+                printf(" !!%d!! rank()File read error!\n",i+1);
+        }
+   fclose(fp);
 	 while(player[n].score>=GRADE&&n<10)
-	 {
-		 n++;
-	 }
+       {
+           n++;
+       }
 	 for(i=10;i>n;i--)
-	 {
-		player[i]=player[i-1];
-	 }
+       {
+           player[i]=player[i-1];
+       }
 
 	 /*if(n==11)
 	 {
@@ -43,12 +45,12 @@ int rank()
 	//录入函数
 int write(int n)
 {
-	 player[n].score=GRADE;
-	 /*printf("please sign your name and press Enter to end.\n");*/
-	 scanf("%s",player[n].name);
+    player[n].score=GRADE;
+    /*printf("please sign your name and press Enter to end.\n");*/
+    scanf("%s",player[n].name);
 }
 
-	/*交换函数
+ /*交换函数
 int exchang()
 {
 	 player[11]=player[n];
@@ -60,24 +62,22 @@ int exchang()
 	//玩家记录录入函数
 int save()
 {
-	 FILE* fp;
-	 int i;
+    FILE* fp;
+    int i;
 
-	 if((fp=fopen("data.dat","wb"))==NULL)
-	 {
-		 printf("Can't open save file!\n");
-		 return 0;
-	 }
-     for(i=0;i<10;i++)
-	 {
-		
-		 if(fwrite(&player[i],sizeof(struct Data),1,fp)!=1)
-		 printf("File write error!\n");
-		
-		 //fseek(fp,i*sizeof(struct Data),0);
-		 return 0;
-	 }
-	 fclose(fp);
+    if((fp=fopen("data.dat","wb"))==NULL)
+        {
+            printf("Can't open save file!\n");
+            return 0;
+        }
+    for(i=0;i<10;i++)
+        {
+            if(fwrite(&player[i],sizeof(struct Data),1,fp)!=1)
+                printf("File write error!\n");
+            //fseek(fp,i*sizeof(struct Data),0);
+            return 0;
+        }
+    fclose(fp);
 
 
 }

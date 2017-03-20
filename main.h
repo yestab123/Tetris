@@ -55,24 +55,7 @@ float sixTIME=0.30F;
 /////////////
 
 
-//////queue.c///
-#define OK 1;
-//#define ERROR 0;
 
-
-typedef struct Queue_DATA
-{
-    int MARK;
-    struct Queue_DATA *next;
-}Queue_DATA,*Queue_POINT;
-
-typedef struct Queue
-{
-    Queue_POINT front;
-    Queue_POINT rear;
-}Queue;
-
-Queue Q;
 
 ///////////////////////////////////
 
