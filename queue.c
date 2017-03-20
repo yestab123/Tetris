@@ -30,7 +30,7 @@ int EnQueue(Queue *Q,int e)
 int DeQueue(Queue *Q,int *e)
 {
     Queue_POINT p;
-    if((*Q).rear==(*Q).front)return ERROR;
+    if((*Q).rear==(*Q).front)return 0;
     p=(*Q).front->next;
     (*e)=p->MARK;
     (*Q).front->next=p->next;
