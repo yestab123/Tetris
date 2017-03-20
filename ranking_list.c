@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 #include "ranking_list.h"
+
+struct Data
+{
+    int score;
+    char name[20];
+
+}player[11]={0,"player?"},list[11]={0,"player?"};
 
 extern int GRADE;
 

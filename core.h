@@ -31,6 +31,4 @@ void drawFrame();
 //#define	CLOCKS_PER_SEC	((clock_t)1000)//time//它用来表示一秒钟会有多少个时钟计时单元
 
 
-
-
 #endif
