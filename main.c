@@ -14,7 +14,7 @@
 #include "screen.h"
 #include "ranking_list.h"
 #include "queue.h"
-//Version 1.0.21
+//Version 2.1
 
 extern Queue Q;
 extern float dropTIME;
@@ -29,7 +29,7 @@ int testnum=0;
 int setCOLOR=0;//blocks with color;1=red,2=blue,3=green,4=yellow,0=;
 int setCOLORfore=0;
 int downCOLOR=0;
-HANDLE setHandleaa;//¾ä±úÉùÃ÷
+HANDLE setHandleaa;//Â¾Ã¤Â±ÃºÃ‰Ã¹ÃƒÃ·
 clock_t clockNow,clockLast;//remeber two time.
 
 int screen_a[24][12]={0};
@@ -443,7 +443,7 @@ int KEY_CATCH()
             if (clockNow - clockLast > dropTIME * CLOCKS_PER_SEC)//if twice time max 0.45s ,down;
             {
                 clockLast = clockNow;
-                r_move();  // ·½¿éÍùÏÂÒÆ
+                r_move();  // Â·Â½Â¿Ã©ÃÃ¹ÃÃ‚Ã’Ã†
             }
         }
         else if(kbhit())
@@ -470,7 +470,7 @@ int main()
 	int i,j,k,m;
 	InitQueue(&Q);//
     setHandleaa=GetStdHandle(STD_OUTPUT_HANDLE);//Get stdin handle
-    SetConsoleTitleA("Program Project Tetris .Ver.1.0.21");//set title
+    SetConsoleTitleA("Program Project Tetris .Ver-2.1");//set title
     system("cls");
     GAMECHOICE();
     return 0;
