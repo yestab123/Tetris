@@ -1,3 +1,8 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -14,7 +19,6 @@
 #include "screen.h"
 #include "ranking_list.h"
 #include "queue.h"
-//Version 2.1
 
 extern Queue Q;
 extern float dropTIME;
@@ -470,7 +474,7 @@ int main()
 	int i,j,k,m;
 	InitQueue(&Q);//
     setHandleaa=GetStdHandle(STD_OUTPUT_HANDLE);//Get stdin handle
-    SetConsoleTitleA("Program Project Tetris .Ver-2.1");//set title
+    SetConsoleTitleA("Tetris Ver:1.0");//set title
     system("cls");
     GAMECHOICE();
     return 0;

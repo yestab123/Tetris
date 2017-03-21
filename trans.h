@@ -1,3 +1,8 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #ifndef _TRANS_HEADER_
 #define _TRANS_HEADER_
 

@@ -1,3 +1,8 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

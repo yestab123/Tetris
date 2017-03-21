@@ -1,3 +1,8 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #ifndef _RANKING_HEADER
 #define _RANKING_HEADER
 

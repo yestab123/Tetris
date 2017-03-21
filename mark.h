@@ -1,3 +1,8 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #ifndef _MARK_HEADER_
 #define _MARK_HEADER_
 

@@ -1,5 +1,12 @@
+/*
+ * CopyRight (c) yestab123, shuzi, ZDJ
+ * University course assignments at 2013
+ */
+
 #ifndef _CORE_HEADER_
 #define _CORE_HEADER_
+
+// VERSION 1.0
 
 #define STAY 2 //the block stop
 #define DOWN 1 // which block is moving
